@@ -1,0 +1,21 @@
+body {
+  background-color: #282929;
+
+}
+.card {
+	border-radius: 15px;
+}
+.pos-qty {
+  width: 100px;
+  height: auto;
+  background-color: #d93b30;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  overflow-wrap: break-word;
+  font-size: 18px;
+}
+.pos-qty:active {
+  background-color: #872720;
+}

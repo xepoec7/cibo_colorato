@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title_block %}| POS{% endblock title_block %}
+
+{% block css_block %}
+	<style>
+		.btn-row {
+			padding: 30px 10px 10px;
+		}
+		.card-body a {
+			text-decoration: none;
+			color: black;
+			font-size: 18px;
+		}
+		.list-group-item {
+			font-size: 14px;
+		}
+		.list-group-item a {
+			font-size: 14px;
+			color: red;
+		}
+		.card-btn {
+			padding-top: 10px;
+		}
+	</style>
+{% endblock css_block %}
+
+{% block content_block %}
+	<div class="container-fluid">
+
+		<!--- QTY -->
+		<div class="row btn-row">
+			<div class="col-12">
+				<div class="pos-qty" id="qtyBtn">Mänge</div>
+			</div>
+		</div>
+
+
+        <div class="row">
+
+        	<!-- ITEMS TABLE -->
+        	<div class="col-12 col-md-8 col-lg-8">
+        		<div class="card bg-dark text-white">
+        			<div class="card-body">
+        				<div class="row" id="board"></div>
+        			</div>
+        		</div>
+        	</div>
+
+        	<!-- ORDER -->
+        	<div class="col-12 col-md-4 col-lg-4">
+        		<div class="card bg-dark text-white">
+        			<div class="card-header text-warning">Bestellung</div>
+        			<div class="card-body">
+        				<ul class="list-group" id="cart"></ul>
+        			</div>
+        			<div class="card-footer text-end">
+        				<div class="row" id="footer">
+        					<div class="col-6 text-start" id="cart_btn">
+        						<a href="/pos/check" class="btn btn-sm btn-success">Bestellen</a>
+        					</div>
+        					<div class="col-6 text-end">
+        						<strong class="text-warning" id="cart_sum"></strong>
+        					</div>
+        				</div>
+        			</div>
+        		</div>
+        	</div>
+
+        </div>
+
+	</div>
+
+	<!-- Modal --> 
+	<div class="modal fade" id="qtyModal" tabindex="-1" aria-labelledby="qtyModal" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content bg-dark text-white">
+				<div class="modal-header">
+					<h5 class="modal-title">Mänge</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="row py-2">
+						<div class="col-12">
+							<h2 id="modalQtyLabel" class="text-center text-success">1</h2>
+						</div>
+					</div>
+					<!-- Numbers -->
+					<div class="row text-center" id="modalNumberBlock">
+						<div class="row py-1">
+							<div class="col-4">
+								<input type="button" onclick="modalNumpadClicked(event)" value="7">
+							</div>
+							<div class="col-4">
+								<input type="button" onclick="modalNumpadClicked(event)" value="8">
+							</div>
+							<div class="col-4">
+								<input type="button" onclick="modalNumpadClicked(event)" value="9">
+							</div>
+						</div>
+						<div class="row py-1">
+							<div class="col-4">
+								<input type="button" onclick="modalNumpadClicked(event)" value="4">
+							</div>
+							<div class="col-4">
+								<input type="button" onclick="modalNumpadClicked(event)" value="5">
+							</div>
+							<div class="col-4">
+								<input type="button" onclick="modalNumpadClicked(event)" value="6">
+							</div>
+						</div>
+						<div class="row py-1">
+							<div class="col-4">
+								<input type="button" onclick="modalNumpadClicked(event)" value="1">
+							</div>
+							<div class="col-4">
+								<input type="button" onclick="modalNumpadClicked(event)" value="2">
+							</div>
+							<div class="col-4">
+								<input type="button" onclick="modalNumpadClicked(event)" value="3">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock content_block %}
+
+{% block script_block %}
+	<script type="text/javascript" src="{% static 'js/pos.js' %}"></script>
+{% endblock script_block %}

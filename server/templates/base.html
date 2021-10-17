@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="de">
+<head>
+	<meta charset="utf-8" />
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
+  	<link href="static/css/bootstrap.min.css.map" />
+  	<link rel="stylesheet" type="text/css" href="{% static 'css/cibo.css' %}" />
+
+	<title>Cibo Colorato {% block title_block %}{% endblock title_block %}</title>
+
+	{% block css_block %}{% endblock css_block %}
+</head>
+<body>
+	{% include "navbar.html" %}
+
+	<main>
+		{% block content_block %}{% endblock content_block %}
+	</main>
+
+
+	<script type="text/javascript" src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+
+	{% block script_block %}{% endblock script_block %}
+
+
+	{% if messages %}
+		{% for message in messages %}
+			<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+				<div class="toast-header">
+					<strong class="me-auto">{{ message.tags }}</strong>
+					<btn type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></btn>
+				</div>
+				<div class="toast-body">
+					{{ message }}
+				</div>
+			</div>
+		{% endfor %}
+	{% endif %}
+</body>
+</html>

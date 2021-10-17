@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title_block %}| Karte{% endblock title_block %}
+
+{% block content_block %}
+	<div class="container-fluid text-white">
+		{% if kategorien %}
+			{% for kat in kategorien %}
+
+				<div class="row">
+					<div class="col-12">
+						<h4>{{kat.name}}</h4>
+						<hr>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<ul class="list-group">
+							{% for art in artikeln %}
+								<li class="list-goup-item">
+									<div class="col-4">
+										<img class="img-fluid" src="{{ art.bild }}"></img>
+									</div>
+									<div class="col-6">
+										<div class="row">
+											<div class="col-12">{{ art.name }}</div>
+										</div>
+										<div class="row">
+											<div class="col-12">
+												<p>{{ art.zutaten }}</p>
+											</div>
+										</div>
+									</div>
+									<div class="col-2">
+										<p>{{ art.preis }}</p>
+									</div>
+								</li>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+			{% endfor %}
+		{% endif %}
+	</div>
+{% endblock content_block %}

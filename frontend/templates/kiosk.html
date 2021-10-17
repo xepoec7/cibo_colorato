@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Cibo Colorato ::: Kiosk</title>
+</head>
+<body>
+	<div class="carousel slide" id="kiosk" data-bs-ride="carousel">
+		<div class="carousel-inner">
+			{% for seite in kiosk %}
+				{% if forloop.first %}
+					<div class="carousel-item active">
+						<img src="{{ seite.bild }}" width="1920" height="1080">
+					</div>
+				{% else %}
+					<div class="carousel-item">
+						<img src="{{ seite.bild }}" width="1920" height="1080">
+					</div>
+				{% endif %}
+			{% endfor %}
+		</div>
+	</div>
+</body>
+</html>
