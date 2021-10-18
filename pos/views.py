@@ -7,6 +7,7 @@ from django.http import HttpResponse, JsonResponse
 
 from .models import Kategorie, Artikel, Rechnung, Einheit
 from .helpers.cart import Cart
+from .helpers.printer import Printer
 from .forms import RechnungForm
 
 
@@ -17,6 +18,7 @@ def pos_page(request):
 
 def pos_check(request):
 	cart = Cart(request)
+
 	if request.method == 'POST':
 		form = RechnungForm(request.POST)
 		if form.is_valid():
@@ -27,7 +29,13 @@ def pos_check(request):
 				product = item['product']
 				inv_item = Einheit(rechnung=rechnung, artikel=product, mange=item['qty'])
 				inv_item.save()
-				return redirect('pos:pos_sent')
+			printer = Printer()
+			is_printed = False
+			while(is_printed == False):
+				is_printed = printer.print_inv(rechnung)
+			cart.clear()
+			return redirect('pos:pos_sent')
+
 	contx = {'cart': cart, 'form': RechnungForm()}
 	return render(request, 'check.html', contx)
 

@@ -33,6 +33,7 @@
 		<div class="row btn-row">
 			<div class="col-12">
 				<div class="pos-qty" id="qtyBtn">Mänge</div>
+				<h4 id="selectedQty"></h4>
 			</div>
 		</div>
 
@@ -55,7 +56,7 @@
         			<div class="card-body">
         				<ul class="list-group" id="cart"></ul>
         			</div>
-        			<div class="card-footer text-end">
+        			<div class="card-footer text-end" id="cartFooter">
         				<div class="row" id="footer">
         					<div class="col-6 text-start" id="cart_btn">
         						<a href="/pos/check" class="btn btn-sm btn-success">Bestellen</a>
@@ -83,7 +84,7 @@
 				<div class="modal-body">
 					<div class="row py-2">
 						<div class="col-12">
-							<h2 id="modalQtyLabel" class="text-center text-success">1</h2>
+							<h2 id="modalQtyLabel" class="text-center text-success"></h2>
 						</div>
 					</div>
 					<!-- Numbers -->
@@ -121,7 +122,20 @@
 								<input type="button" onclick="modalNumpadClicked(event)" value="3">
 							</div>
 						</div>
+						<div class="row py-1">
+							<div class="col-4"></div>
+							<div class="col-4">
+								<input type="button" onclick="modalNumpadClicked(event)" value="0">
+							</div>
+							<div class="col-4">
+								<input type="button" onclick="modalNumpadClicked(event)" value="C">
+							</div>
+						</div>
 					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-danger" data-bs-dismiss="modal">Abbrechen</button>
+					<button class="btn btn-success" onclick="modalOkBtnClicked()">OK</button>
 				</div>
 			</div>
 		</div>

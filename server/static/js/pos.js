@@ -1,7 +1,9 @@
 // Main 
+var selectedQty = $('#selectedQty');
 var board = $('#board');
 var cart = $('#cart');
 var cart_sum = $('#cart_sum');
+var cartFooter = $('#cartFooter');
 
 // Modal 
 var modalQtyLabel = $('#modalQtyLabel');
@@ -9,6 +11,7 @@ var modalNumberBlock = $('#modalNumberBlock');
 
 
 var qty = 1;
+var temp_qty = null;
 
 
 
@@ -92,6 +95,11 @@ function fetchCart() {
 		type: 'GET',
 		url: '/pos/ajax/cart/', 
 		success: function(data) {
+			if (data.items.length == 0) {
+				cartFooter.hide();
+			} else {
+				cartFooter.show();
+			}
 			drawCart(data.items);
 			cart_sum.empty();
 			cart_sum.append(data.cart_total + '€');
@@ -107,12 +115,38 @@ $(document).ready(function() {
 	fetchData();
 	fetchCart();
 	$('#qtyBtn').click(function() {
-		modalQtyLabel.empty();
-		modalQtyLabel.append(qty);
 		$('#qtyModal').modal('show');
 	});
 });
 
+
+
+// Modal
+
+
+
 function modalNumpadClicked(number) {
-	modalQtyLabel.val(number.target.value);
+	if (number.target.value == 'C') {
+		var qtyStr = temp_qty.toString();
+		if (qtyStr.length > 1) {
+			qtyStr = qtyStr.substring(0, qtyStr.length -1);
+
+		} else {
+			qtyStr = "0" ;
+		}
+		temp_qty = parseInt(qtyStr);
+	}
+	else {
+		if (temp_qty == null) temp_qty = parseInt(number.target.value);
+		else {
+			temp_qty = (temp_qty * 10) + parseInt(number.target.value);
+		}
+	}
+	modalQtyLabel.text(temp_qty);
+}
+
+function modalOkBtnClicked() {
+	qty = temp_qty;
+	$('#qtyModal').modal('hide');
+	selectedQty.text("X"+qty);
 }
