@@ -31,9 +31,11 @@
 
 		<!--- QTY -->
 		<div class="row btn-row">
-			<div class="col-12">
+			<div class="col-3">
 				<div class="pos-qty" id="qtyBtn">Mänge</div>
-				<h4 id="selectedQty"></h4>
+			</div>
+			<div class="col">
+				<h4 id="selectedQty" class="text-warning"></h4>
 			</div>
 		</div>
 
@@ -41,7 +43,7 @@
         <div class="row">
 
         	<!-- ITEMS TABLE -->
-        	<div class="col-12 col-md-8 col-lg-8">
+        	<div class="col-12 col-md-8 col-lg-9">
         		<div class="card bg-dark text-white">
         			<div class="card-body">
         				<div class="row" id="board"></div>
@@ -50,7 +52,7 @@
         	</div>
 
         	<!-- ORDER -->
-        	<div class="col-12 col-md-4 col-lg-4">
+        	<div class="col-12 col-md-4 col-lg-3">
         		<div class="card bg-dark text-white">
         			<div class="card-header text-warning">Bestellung</div>
         			<div class="card-body">
@@ -128,7 +130,7 @@
 								<input type="button" onclick="modalNumpadClicked(event)" value="0">
 							</div>
 							<div class="col-4">
-								<input type="button" onclick="modalNumpadClicked(event)" value="C">
+								<input class="clearBtn" type="button" onclick="modalNumpadClicked(event)" value="C">
 							</div>
 						</div>
 					</div>

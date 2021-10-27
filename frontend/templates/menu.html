@@ -1,45 +1,204 @@
-{% extends "base.html" %}
+{% extends "open_base.html" %}
+{% block title_block %}| Menü{% endblock title_block %}
 
-{% block title_block %}| Karte{% endblock title_block %}
+{% block css_block %}
+	<style type="text/css">
+		.separator {
+			color: green;
+			height: 2px;
+			width: 20%;
+			position: relative;
+			margin: 30px auto;
+		}
+		.bgimage {
+			width: 100%;
+			height: 300px;
+			background: url('https://www.herold.at/blog/wp-content/uploads/2017/08/neapolitanische-Pizza-Wien-2-1280x720.jpg');
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: cover;
+			background-attachment: fixed;
+		}
+		.bgimage h5 {
+			color: white;
+			text-shadow: 2px 2px #333;
+		}
+		.section-title {
+			font-family: 'Tangerine', cursive;
+			font-weight: 900;
+		}
+		.menu-section {
+			background-color: #ededed;
+		}
+		.nav {
+			background-color: white;
+			margin-top: 80px;
+			padding: 15px;
+		}
+		.nav-link {
+			color: black;
+		}
+		.card-title {
+			color: green;
+		 	font-weight: 400;
+		}
+		.card-price {
+			color: green;
+			font-weight: 600;
+		}
+	</style>
+{% endblock css_block %}
 
 {% block content_block %}
-	<div class="container-fluid text-white">
-		{% if kategorien %}
-			{% for kat in kategorien %}
 
+<!-- HERO SECTION -->
+	<section class="bgimage">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<h5>Hello, World! Full width hero-unit header</h5>
+					<p>This is a template for a simple marketing or informational website.</p>
+					<p><a href="#" class="btn btn-primary btn-lg">Learn more</a></p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+<!-- POPULAR SECTION -->
+	{% if not popular %}
+		<section class="py-5">
+			<div class="container text-center">
 				<div class="row">
 					<div class="col-12">
-						<h4>{{kat.name}}</h4>
-						<hr>
+						<h1 class="section-title">Unsere Populäre Essen</h1>
+						<hr class="separator">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed magna lorem, porta vel lobortis vel, venenatis in erat. Quisque rhoncus et urna vel commodo. Sed eleifend malesuada nisi, ut consectetur ligula placerat sed.</p>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-12">
-						<ul class="list-group">
-							{% for art in artikeln %}
-								<li class="list-goup-item">
-									<div class="col-4">
-										<img class="img-fluid" src="{{ art.bild }}"></img>
+					{% for dish in popular %}
+						<div class="col">
+							<div class="card">
+								<img class="card-img-top" src="dish.bild">
+								<div class="card-body">
+									<h5>dish.name</h5>
+									<p>dish.zutaten</p>
+									<h4>dish.preis</h4>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</section>
+	{% endif %}
+
+
+<!-- MENU SECTION -->
+	<section class="py-5 menu-section">
+		<div class="container">
+			<div class="row text-center">
+				<h1 class="section-title">Unsere Menü</h1>
+	
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+					<ul class="nav nav-pills justify-content-center">
+						<li class="nav-item">
+							<a href="#" class="nav-link active">Alle</a>
+						</li>
+						{% for kat in kategorien %}
+							<li class="nav-item">
+								<a href="#" class="nav-link">{{ kat.name }}</a>
+							</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+
+			<div class="row py-5">
+
+				{% for art in artikeln %}
+					<div class="col-6">
+						<div class="card" style="margin-bottom: 5px;">
+							<div class="row g-0">
+								<div class="col-8">
+									<div class="card-body">
+										<h5 class="card-title">{{ art.name }}</h5>
+										<p class="card-text">
+											{% if art.zutaten %}
+												{{ art.zutaten }}
+											{% endif %}
+										</p>
 									</div>
-									<div class="col-6">
-										<div class="row">
-											<div class="col-12">{{ art.name }}</div>
-										</div>
-										<div class="row">
-											<div class="col-12">
-												<p>{{ art.zutaten }}</p>
-											</div>
-										</div>
+								</div>
+								<div class="col-4">
+									<div class="card-body">
+										<p class="card-price">{{ art.preis }} €</p>
 									</div>
-									<div class="col-2">
-										<p>{{ art.preis }}</p>
-									</div>
-								</li>
-							{% endfor %}
-						</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+
+
+				<div class="col-6">
+					<div class="card">
+						<div class="row g-0">
+							<div class="col-md-3">
+								<img src="https://www.aspicyperspective.com/wp-content/uploads/2019/02/japanese-clear-soup-recipe-12-256x256.jpg" alt="" class="img-fluid rounded-start">
+							</div>
+							<div class="col-md-7">
+								<div class="card-body">
+									<h5 class="card-title">Suppe Name Gehts Hir</h5>
+									<p class="card-text">
+										wasser / zwibel / nuddel
+									</p>
+									<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<b>12,99 €</b>
+							</div>
+						</div>
 					</div>
 				</div>
-			{% endfor %}
-		{% endif %}
-	</div>
+
+				<div class="col-6">
+					<div class="card">
+						<div class="row g-0">
+							<div class="col-md-3">
+								<img src="https://m.media-amazon.com/images/I/B1xEapcpGcS._CR0,504,3024,3024_UX256.jpg" alt="" class="img-fluid rounded-start">
+							</div>
+							<div class="col-md-7">
+								<div class="card-body">
+									<h5 class="card-title">Pizza Caprisoca</h5>
+									<p class="card-text">
+										<b>mozzarela / schinken / tommaten souce / champinions / artichoke</b>
+									</p>
+									<p class="card-text">
+										<small>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</small>
+									</p>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="card-body">
+									<p class="card-price">13,45 €</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 {% endblock content_block %}
+
+{% block script_block %}
+	<script type="text/javascript">
+
+	</script>
+{% endblock script_block %}

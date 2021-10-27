@@ -19,7 +19,7 @@ function drawItemsOnBoard(data) {
 	board.empty();
 	if (data[0]['model'] != 'pos.kategorie') {
 		board.append(
-			'<div class="col-6 col-md-4 col-lg-2>"' +
+			'<div class="col-6 col-sm-4 col-md-3 col-lg-2>"' +
 			'<a href="/pos/ajax/" onclick="fetchData()">' +
 			'<div class="card text-white bg-success h-100">' +
 			'<div class="card-body text-center">Züruck</div></div></a></div>'
@@ -27,7 +27,7 @@ function drawItemsOnBoard(data) {
 	}
 	for (var i = data.length - 1; i >= 0; i--) {
 		board.append(
-			'<div class="col-6 col-md-4 col-lg-2 card-btn"> '+
+			'<div class="col-6 col-sm-4 col-md-3 col-lg-2 card-btn"> '+
 			'<a href="/pos/ajax/' +data[i]['model']+ '/' +data[i]['pk'] + '"' +
 			'onclick="fetchData(event)"> ' +
 			'<div class="card text-dark bg-warning h-100"><div class="card-body text-center">'+
@@ -42,6 +42,7 @@ function fetchData(obj=null) {
 	if (obj != null) {
 		obj.preventDefault();
 		url_string = obj.currentTarget.href;
+		if (url_string.includes('arti') && qty > 1) url_string = url_string + '/' + qty ;
 	}
 	$.ajax({
 		type: 'GET',
@@ -50,7 +51,12 @@ function fetchData(obj=null) {
 			if (!url_string.includes('arti')) {
 				drawItemsOnBoard(data);
 			} else {
+				fetchData();
 				fetchCart();
+				qty = 1;
+				temp_qty = null;
+				selectedQty.hide();
+				modalQtyLabel.empty();
 			}
 		},
 		error: function(er) {
@@ -146,7 +152,9 @@ function modalNumpadClicked(number) {
 }
 
 function modalOkBtnClicked() {
-	qty = temp_qty;
+	if (temp_qty == 0) qty = 1;
+	else qty = temp_qty;
 	$('#qtyModal').modal('hide');
 	selectedQty.text("X"+qty);
+	selectedQty.show();
 }

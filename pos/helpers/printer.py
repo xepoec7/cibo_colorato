@@ -21,7 +21,7 @@ class Printer(object):
 
 			self.printer.set_text_size(0, 0)
 			self.printer.justify_left()
-			out = 'Bestellnummer: {}'.format(inv.id)
+			out = 'Bestellnummer: {}'.format(inv.rechnung_num)
 			self.printer.text(out)
 			out = 'Datum         : {}'.format(inv.erstellt.strftime('%d.%m.%Y %H:%M'))
 			self.printer.text(out)
@@ -31,6 +31,16 @@ class Printer(object):
 			self.printer.text(out)
 			out = 'Tel Nummer    : {}'.format(inv.kunden_tel)
 			self.printer.text(out)
+
+			""" Note to restaurant if exist """
+			if inv.notiz is not None:
+				self.printer.lf(1)
+				self.printer.text('--------------------------------')
+				out = 'Notiz zum Bestellung:'
+				self.printer.text(out)
+				self.printer.text(inv.notiz)
+				self.printer.text('--------------------------------')
+				self.printer.lf(1)
 
 			""" Items """ 
 			self.printer.text('ME Artikelname          EP  GP  ')

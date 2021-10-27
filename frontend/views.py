@@ -13,6 +13,6 @@ def kiosk_page(request):
 
 def menu_page(request):
 	kats = Kategorie.objects.all()
-	arts = Artikel.objects.all()
+	arts = Artikel.objects.order_by('-kategorie')
 	contx = {'kategorien': kats, 'artikeln': arts}
 	return render(request, 'menu.html', contx)

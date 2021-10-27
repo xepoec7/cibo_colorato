@@ -7,6 +7,7 @@ urlpatterns = [
 	path('', views.pos_page, name='pos'),
 	path('check/', views.pos_check, name='pos_check'),
 	path('gesendet/', views.pos_sent, name='pos_sent'),
+	path('nachricht/', views.pos_msg, name='pos_msg'),
 	path('ajax/', views.pos_ajax, name='pos_ajax'),
 	path('ajax/<str:type>/<int:id>/', views.pos_ajax, name='pos_ajax'),
 	path('ajax/<str:type>/<int:id>/<int:qty>/', views.pos_ajax, name='pos_ajax'),
