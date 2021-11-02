@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.core import serializers
 
-from pos.models import Kategorie, Artikel, KioskSeite
+from pos.models import Kategorie, Artikel, KioskSeite, MeistGekaufte
 
 
 def home_page(request):
@@ -17,18 +17,18 @@ def kiosk_page(request):
 def menu_page(request):
 	kats = Kategorie.objects.all()
 	arts = Artikel.objects.order_by('-kategorie')
-	contx = {'kategorien': kats, 'artikeln': arts}
+	popular = MeistGekaufte.objects.get(pk=1)
+	contx = {'kategorien': kats, 'artikeln': arts, 'popular': popular}
 	return render(request, 'menu.html', contx)
 
 
 
 # AJAX 
 def ajax_menu_nav(request, cat_id):
+	art_list = []
 	if cat_id == 0:
-		arts = Artikel.objects.all(auf_karte=True)
+		resp = serializers.serialize('json', Artikel.objects.all())
 	else:
 		kat = Kategorie.objects.get(pk=cat_id)
-		arts = Artikel.objects.all().filter(kategorie=kat)
-	#arts = serializers.serialize('json', arts)
-	resp = {'artikeln': arts}
-	return JsonResponse(resp, safe=False)
+		resp = serializers.serialize('json', kat.artikel_set.all())
+	return HttpResponse(resp, content_type='application/json')

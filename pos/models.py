@@ -23,6 +23,17 @@ class Artikel(models.Model):
 
 
 
+class MeistGekaufte(models.Model):
+	artikel_1 = models.ForeignKey(Artikel, null=True, blank=True, on_delete=models.SET_NULL, related_name='artikel_1')
+	artikel_2 = models.ForeignKey(Artikel, null=True, blank=True, on_delete=models.SET_NULL, related_name='artikel_2')
+	artikel_3 = models.ForeignKey(Artikel, null=True, blank=True, on_delete=models.SET_NULL, related_name='artikel_3')
+	artikel_4 = models.ForeignKey(Artikel, null=True, blank=True, on_delete=models.SET_NULL, related_name='artikel_4')
+
+	def __str__(self):
+		return 'Liste von 4 Artikeln'
+
+
+
 class Rechnung(models.Model):
 	BESTELT_PER = (
 		("TEL", "Telefonisch"),

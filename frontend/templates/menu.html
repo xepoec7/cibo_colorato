@@ -1,4 +1,5 @@
 {% extends "open_base.html" %}
+{% load static %}
 {% block title_block %}| Menü{% endblock title_block %}
 
 {% block css_block %}
@@ -48,7 +49,7 @@
 
 
 <!-- POPULAR SECTION -->
-	{% if not popular %}
+	{% if popular %}
 		<section class="section">
 			<div class="container text-center">
 				<div class="row justify-content-center">
@@ -60,19 +61,61 @@
 						</p>
 					</div>
 				</div>
-				<div class="row">
-					{% for dish in popular %}
-						<div class="col">
+				<div class="row justify-content-center" style="margin-top: 30px;">
+					
+					{% if popular.artikel_1 %}
+						<div class="col-3">
 							<div class="card">
-								<img class="card-img-top" src="dish.bild">
+								<img class="card-img-top" src="{{ popular.artikel_1.bild.url }}">
 								<div class="card-body">
-									<h5>dish.name</h5>
-									<p>dish.zutaten</p>
-									<h4>dish.preis</h4>
+									<h5>{{ popular.artikel_1.name }}</h5>
+									<p>{{ popular.artikel_1.zutaten }}</p>
+									<h4>{{ popular.artikel_1.preis }}</h4>
 								</div>
 							</div>
 						</div>
-					{% endfor %}
+					{% endif %}
+
+					{% if popular.artikel_2 %}
+						<div class="col-3">
+							<div class="card">
+								<img class="card-img-top" src="popular.artikel.bild">
+								<div class="card-body">
+									<h5>{{ popular.artikel_2.name }}</h5>
+									<p>{{ popular.artikel_2.zutaten }}</p>
+									<h4>{{ popular.artikel_2.preis }}</h4>
+								</div>
+							</div>
+						</div>
+					{% endif %}
+
+					{% if popular.artikel_3 %}
+						<div class="col-3">
+							<div class="card">
+								<img class="card-img-top" src="popular.artikel.bild">
+								<div class="card-body">
+									<h5>{{ popular.artikel_3.name }}</h5>
+									<p>{{ popular.artikel_3.zutaten }}</p>
+									<h4>{{ popular.artikel_3.preis }}</h4>
+								</div>
+							</div>
+						</div>
+					{% endif %}					
+
+					{% if popular.artikel_4 %}
+						<div class="col-3">
+							<div class="card">
+								<img class="card-img-top" src="popular.artikel.bild">
+								<div class="card-body">
+									<h5>{{ popular.artikel_4.name }}</h5>
+									<p>{{ popular.artikel_4.zutaten }}</p>
+									<h4>{{ popular.artikel_4.preis }}</h4>
+								</div>
+							</div>
+						</div>
+					{% endif %}
+					
+					
 				</div>
 			</div>
 		</section>
@@ -96,7 +139,7 @@
 				<div class="col-8">
 					<ul class="nav nav-pills justify-content-center">
 						<li class="nav-item">
-							<a href="/menu/ajax/" class="nav-link active">Alle</a>
+							<a href="/menu/ajax/0" class="nav-link active">Alle</a>
 						</li>
 						{% for kat in kategorien %}
 							<li class="nav-item">
@@ -112,8 +155,7 @@
 				
 			</div>
 
-			<div class="row py-5">
-
+			<div class="row py-5" id="menuList">
 				{% for art in artikeln %}
 					<div class="col-12 col-sm-12 col-md-12 col-lg-6">
 						<div class="card">
@@ -137,91 +179,6 @@
 						</div>
 					</div>
 				{% endfor %}
-
-
-				<div class="col-12 col-sm-12 col-md-12 col-lg-6">
-					<div class="card">
-						<div class="row g-0">
-							<div class="col-md-3">
-								<img src="https://www.aspicyperspective.com/wp-content/uploads/2019/02/japanese-clear-soup-recipe-12-256x256.jpg" alt="" class="img-fluid rounded-start">
-							</div>
-							<div class="col-md-7">
-								<div class="card-body">
-									<h5 class="card-title">Suppe Name Gehts Hir</h5>
-									<p class="card-text">
-										wasser / zwibel / nuddel
-									</p>
-									<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-								</div>
-							</div>
-							<div class="col-md-2">
-								<b>12,99 €</b>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-12 col-sm-12 col-md-12 col-lg-6">
-					<div class="card">
-						<div class="row g-0">
-							<div class="col-12 col-md-3 text-center">
-								<img src="https://m.media-amazon.com/images/I/B1xEapcpGcS._CR0,504,3024,3024_UX256.jpg" alt="" class="img-fluid rounded-start">
-							</div>
-							<div class="col-12 col-md-7">
-								<div class="card-body">
-									<h5 class="card-title">Pizza Caprisoca</h5>
-									<p class="card-text">
-										<b>mozzarela / schinken / tommaten souce / champinions / artichoke</b>
-									</p>
-									<p class="card-text">
-										<small>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</small>
-									</p>
-								</div>
-							</div>
-							<div class="col-12 col-md-2">
-								<div class="card-body">
-									<p class="card-price">13,45 €</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-12 col-sm-12 col-md-12 col-lg-6">
-					<div class="card">
-						<div class="row g-0">
-
-							<div class=" col-4 text-center">
-								<img src="https://m.media-amazon.com/images/I/B1xEapcpGcS._CR0,504,3024,3024_UX256.jpg" alt="" class="img-fluid rounded-start">
-							</div>
-
-							<div class=" col-8">
-								<div class="card-body">
-
-									<div class="row">
-										<div class="col-8">
-											<h5 class="card-title">Pizza Capriciosa</h5>
-										</div>
-										<div class="col-4 float-end">
-											<p class="card-price">135,99 €</p>
-										</div>
-									</div>
-
-									<div class="row">
-										<div class="col-12">
-											<p class="card-text">
-												<b>mozzarela / schinken / tommaten souce / champinions / artichoke</b>
-											</p>
-										</div>
-									</div>
-
-
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
 			</div>
 		</div>
 	</section>

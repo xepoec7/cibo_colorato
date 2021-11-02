@@ -1,13 +1,118 @@
-{% extends "base.html" %}
+{% extends "open_base.html" %}
 {% load static %}
+{% block title_block %}| Home{% endblock title_block %}
+
+{% block css_block %}
+	<style type="text/css">
+		.bgimage {
+			width: 100%;
+			height: 500px;
+			background: url('https://www.herold.at/blog/wp-content/uploads/2017/08/neapolitanische-Pizza-Wien-2-1280x720.jpg');
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: cover;
+			background-attachment: fixed;
+		}
+		.bgimage h5 {
+			color: white;
+			text-shadow: 2px 2px #333;
+		}
+		.hero-text {
+			position: relative;
+			height: 300px;
+		}
+		.hero-title {
+			margin: 0;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			color: white;
+			text-shadow: 2px 2px #333;
+		}
+
+	</style>
+{% endblock css_block %}
 
 {% block content_block %}
-	<div class="container">
-		<div class="row py-5">
-			<div class="col-12 text-white">
-				<h1>Home</h1>
-				<hr>
+	<!-- NAV -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-muted fixed-top">
+		<div class="container-fluid">
+	    	<a class="navbar-brand" href="#">Cibo Colorato</a>
+	    	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	      		<span class="navbar-toggler-icon"></span>
+	    	</button>
+	    	<div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+	      		<ul class="navbar-nav ">
+	        		<li class="nav-item">
+	          			<a class="nav-link" aria-current="page" href="#">Home</a>
+	        		</li>
+	        		<li class="nav-item">
+	          			<a class="nav-link" href="/menu/">Menü</a>
+	        		</li>
+	        		<li class="nav-item">
+	          			<a class="nav-link" href="#">Über Uns</a>
+	        		</li>
+	        		<li class="nav-item">
+	        			<a class="nav-link">Galerie</a>
+	        		</li>
+	        		<li class="nav-item">
+	        			<a class="nav-link">Wo Wir Sind</a>
+	        		</li>
+	        		<li class="nav-item">
+	        			<a class="nav-link">Kontakt</a>
+	        		</li>
+	      		</ul>
+	    	</div>
+	  	</div>
+	</nav>
+
+
+
+	<!-- HERO -->
+	<section id="section_home" class="bgimage">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="hero-text col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+					<h1 class="hero-title">Menü</h1>
+				</div>
 			</div>
 		</div>
-	</div>
+	</section>
+
+
+
+
+	<!-- ABOUT -->
+	<section id="section_about">
+		<div class="container">
+			<div class="row">
+				<div class="col-6">
+					<h3>Lorem Ipsum</h3>
+					<p>
+						 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eleifend egestas fermentum. Sed ac velit tellus. Duis lobortis mauris a fringilla eleifend. Etiam ut euismod orci, id tincidunt enim. Integer a rhoncus felis, sed lobortis elit. Aliquam porttitor est at commodo ultrices. Vivamus ut turpis quis lectus sollicitudin condimentum. Phasellus tincidunt feugiat libero at venenatis. Praesent eleifend quam vel tortor tempus, id tristique nisi hendrerit. Duis laoreet risus quis magna eleifend scelerisque. Donec non ipsum ut ante luctus mollis quis sit amet urna. 
+					</p>
+				</div>
+				<div class="col-6">
+					<img class="img-fluid" src="https://via.placeholder.com/500">
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+	<!-- GALLERY -->
+
+	<!-- LOCATION -->
+	<div id="map"></div>
+
+	<!-- CONTACT -->
 {% endblock content_block %}
+
+{% block script_block %}
+	<script
+      src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap&libraries=&v=weekly"
+      async
+    ></script>
+{% endblock script_block %}

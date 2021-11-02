@@ -16,6 +16,11 @@ class ArtikelAdmin(admin.ModelAdmin):
     search_fields = ('name',)
 
 
+@admin.register(MeistGekaufte)
+class MeistGekaufteAdmin(admin.ModelAdmin):
+    pass
+
+
 class EinheitInline(admin.TabularInline):
     model = Einheit
     extra = 0
