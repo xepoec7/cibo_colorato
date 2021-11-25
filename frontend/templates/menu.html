@@ -64,7 +64,7 @@
 				<div class="row justify-content-center" style="margin-top: 30px;">
 					
 					{% if popular.artikel_1 %}
-						<div class="col-3">
+						<div class="col-12 col-sm-12 col-md-6 col-lg-3">
 							<div class="card">
 								<img class="card-img-top" src="{{ popular.artikel_1.bild.url }}">
 								<div class="card-body">
@@ -77,7 +77,7 @@
 					{% endif %}
 
 					{% if popular.artikel_2 %}
-						<div class="col-3">
+						<div class="col-12 col-sm-12 col-md-6 col-lg-3">
 							<div class="card">
 								<img class="card-img-top" src="popular.artikel.bild">
 								<div class="card-body">
@@ -90,7 +90,7 @@
 					{% endif %}
 
 					{% if popular.artikel_3 %}
-						<div class="col-3">
+						<div class="col-12 col-sm-12 col-md-6 col-lg-3">
 							<div class="card">
 								<img class="card-img-top" src="popular.artikel.bild">
 								<div class="card-body">
@@ -103,7 +103,7 @@
 					{% endif %}					
 
 					{% if popular.artikel_4 %}
-						<div class="col-3">
+						<div class="col-12 col-sm-12 col-md-6 col-lg-3">
 							<div class="card">
 								<img class="card-img-top" src="popular.artikel.bild">
 								<div class="card-body">
@@ -139,11 +139,11 @@
 				<div class="col-8">
 					<ul class="nav nav-pills justify-content-center">
 						<li class="nav-item">
-							<a href="/menu/ajax/0" class="nav-link active">Alle</a>
+							<a href="/menu/ajax/0/" class="nav-link active">Alle</a>
 						</li>
 						{% for kat in kategorien %}
 							<li class="nav-item">
-								<a href="/menu/ajax/{{ kat.pk }}" class="nav-link">{{ kat.name }}</a>
+								<a href="/menu/ajax/{{ kat.pk }}/" class="nav-link">{{ kat.name }}</a>
 							</li>
 						{% endfor %}
 					</ul>
@@ -186,6 +186,40 @@
 
 {% block script_block %}
 	<script type="text/javascript">
+		// Menu Navigation 
+		$('.nav-link').click(function(event) {
+			event.preventDefault();
+			$('.active').removeClass('active');
+			$(this).addClass('active');
+			var uri = event.target.href;
+			
+			$.ajax({
+				url: uri, 
+				type: 'GET',
+				success: function(data) {
+					drawMenuList(data);
+				},
+				error: function(e) {
+					console.error(e);
+				}
+			})
+		});
 
+		function drawMenuList(data) {
+			$('#menuList').empty();
+			
+			for (var i=0; i<data.length; i++) {
+				if (data[i]['fields']['zutaten'] == null) data[i]['fields']['zutaten'] = "";
+				$('#menuList').append(
+					'<div class="col-12 col-sm-12 col-md-12 col-lg-6">' +
+					'<div class="card"><div class="row g-0"><div class="col-8">' +
+					'<div class="card-body"><h5 class="card-title">' +data[i]['fields']['name']+ '</h5>' +
+					'<p class="card-text">' + data[i]['fields']['zutaten'] + '</p></div></div>' +
+					'<div class="col-4"><div class="card-body float-end">' +
+					'<p class="card-price">' + data[i]['fields']['preis'] + '€</p>' +
+					'</div></div></div></div></div>'
+				);
+			}
+		}
 	</script>
 {% endblock script_block %}

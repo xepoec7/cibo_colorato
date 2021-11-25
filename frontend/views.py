@@ -2,11 +2,17 @@ from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 from django.core import serializers
 
+
 from pos.models import Kategorie, Artikel, KioskSeite, MeistGekaufte
+from frontend.models import Einstellung, Aktion
 
 
 def home_page(request):
-	return render(request, 'home.html', {})
+
+	contx = {
+		"einstellung" : Einstellung.objects.get(pk=1),
+	}
+	return render(request, 'home.html', contx)
 
 
 def kiosk_page(request):

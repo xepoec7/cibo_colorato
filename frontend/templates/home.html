@@ -4,32 +4,6 @@
 
 {% block css_block %}
 	<style type="text/css">
-		.bgimage {
-			width: 100%;
-			height: 500px;
-			background: url('https://www.herold.at/blog/wp-content/uploads/2017/08/neapolitanische-Pizza-Wien-2-1280x720.jpg');
-			background-repeat: no-repeat;
-			background-position: center;
-			background-size: cover;
-			background-attachment: fixed;
-		}
-		.bgimage h5 {
-			color: white;
-			text-shadow: 2px 2px #333;
-		}
-		.hero-text {
-			position: relative;
-			height: 300px;
-		}
-		.hero-title {
-			margin: 0;
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			color: white;
-			text-shadow: 2px 2px #333;
-		}
 
 	</style>
 {% endblock css_block %}
@@ -45,13 +19,13 @@
 	    	<div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
 	      		<ul class="navbar-nav ">
 	        		<li class="nav-item">
-	          			<a class="nav-link" aria-current="page" href="#">Home</a>
+	          			<a class="nav-link" aria-current="page" href="home">Home</a>
 	        		</li>
 	        		<li class="nav-item">
 	          			<a class="nav-link" href="/menu/">Menü</a>
 	        		</li>
 	        		<li class="nav-item">
-	          			<a class="nav-link" href="#">Über Uns</a>
+	          			<a class="nav-link" href="#section_about">Über Uns</a>
 	        		</li>
 	        		<li class="nav-item">
 	        			<a class="nav-link">Galerie</a>
@@ -70,11 +44,12 @@
 
 
 	<!-- HERO -->
-	<section id="section_home" class="bgimage">
+	<section id="section_home" class="hero" style="background-image: url('{{ einstellung.home_page_cover_bild }}')">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="hero-text col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-					<h1 class="hero-title">Menü</h1>
+					<h1 class="hero-title">Willkommen zum Cibo Colorato</h1>
+					<button class="btn btn-primary btn-lg">test</button>
 				</div>
 			</div>
 		</div>
@@ -87,14 +62,54 @@
 	<section id="section_about">
 		<div class="container">
 			<div class="row">
-				<div class="col-6">
-					<h3>Lorem Ipsum</h3>
+				<div class="col-12 col-sm-12 col-md-6 col-lg-6">
+					<h3>Über Uns</h3>
 					<p>
-						 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eleifend egestas fermentum. Sed ac velit tellus. Duis lobortis mauris a fringilla eleifend. Etiam ut euismod orci, id tincidunt enim. Integer a rhoncus felis, sed lobortis elit. Aliquam porttitor est at commodo ultrices. Vivamus ut turpis quis lectus sollicitudin condimentum. Phasellus tincidunt feugiat libero at venenatis. Praesent eleifend quam vel tortor tempus, id tristique nisi hendrerit. Duis laoreet risus quis magna eleifend scelerisque. Donec non ipsum ut ante luctus mollis quis sit amet urna. 
+						 {% if einstellung.uber_uns_text %}
+						 	{{ einstellung.uber_uns_text }}
+						 {% endif %}
 					</p>
 				</div>
-				<div class="col-6">
-					<img class="img-fluid" src="https://via.placeholder.com/500">
+				<div class="col-12 col-sm-12 col-md-6 col-lg-6">
+					{% if einstellung.uber_uns_bild %}
+						<img class="img-fluid" src="{{ einstellung.uber_uns_bild }}">
+					{% else %}
+						<img class="img-fluid" src="https://via.placeholder.com/500">
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+	<!-- AKTION -->
+	{% if aktion %}
+		<section id="section_deal" style="background-image: url('{{ aktion.promo_bild }}')">
+			<p>Test</p>
+		</section>
+	{% endif %}
+
+
+
+
+	<!-- LOCATION -->
+	<div id="map"></div>
+
+	<!-- CONTACT -->
+	<section id="section_contact">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-8">
+					<div class="row">
+						<div class="col-12 col-sm-12 col-md-6 col-lg-6">
+							<h4>Kontakt</h4>
+							<p>tel: 0664 5555 3333</p>
+						</div>
+						<div class="col-12 col-sm-12 col-md-6 col-lg-6">
+							<h4>Online Bestellen</h4>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -103,11 +118,16 @@
 
 
 	<!-- GALLERY -->
+	{% if gallery %}
+		<section id="section_gallery">
+			<div class="row">
+				<div class="col-12">
+					<!-- Gallery goes here -->
+				</div>
+			</div>
+		</section>
+	{% endif %}
 
-	<!-- LOCATION -->
-	<div id="map"></div>
-
-	<!-- CONTACT -->
 {% endblock content_block %}
 
 {% block script_block %}
@@ -115,4 +135,14 @@
       src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap&libraries=&v=weekly"
       async
     ></script>
+
+   <script type="text/javascript">
+   		$('.nav-link').click(function(event) {
+   			if ($(this).text() != "Menü") {
+   				event.preventDefault();
+   				console.log(event.target.href );
+   				$(window).scrollTop($('#section_about').offset().top-20);
+   			}
+   		});
+   </script>
 {% endblock script_block %}

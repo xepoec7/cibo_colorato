@@ -10,7 +10,9 @@
   	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Tangerine&display=swap" rel="stylesheet">
-  	<link rel="stylesheet" type="text/css" href="{% static 'css/open.css' %}" /> 
+	<link rel="stylesheet" type="text/css" href="{% static 'css/photoswipe.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/default-skin.css' %}">
+  	<link rel="stylesheet" type="text/css" href="{% static 'css/open.css' %}" />
 
 	<title>Cibo Colorato {% block title_block %}{% endblock title_block %}</title>
 	{% block css_block %}{% endblock css_block %}
@@ -22,8 +24,14 @@
 
 	<script type="text/javascript" src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/photoswipe.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/photoswipe-ui-default.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'js/open.js' %}"></script>
 
 	{% block script_block %}{% endblock script_block %}
+
+	<footer>
+		{% block footer_block %}{% endblock footer_block %}
+	</footer>
 </body>
 </html>
